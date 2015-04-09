@@ -1,0 +1,7 @@
+.cache
+build
+*.txt
+*.tigger
+tests/__pycache__
+*.so
+*.pyc
