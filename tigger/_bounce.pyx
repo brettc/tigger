@@ -12,11 +12,14 @@ import sys
 import numpy
 from cython.operator import dereference as deref, preincrement as preinc
 
+import logging
+log = logging.getLogger("tigger.analyis")
+
 cdef class TigerBase:
     def __cinit__(self):
         pass
 
-    def calc_rates(self):
+    def calc_rates(self, size_t feedback=1000):
         if self.species_count == 0 or self.column_count == 0:
             return None
 
@@ -30,6 +33,8 @@ cdef class TigerBase:
 
         denom = <double>self.column_count - 1.0
         for i in range(self.column_count):
+            if i % feedback == 0:
+                log.info("Processing column %d", i)
             rate = 0.0
             for j in range(self.column_count):
                 # Don't compare to self
