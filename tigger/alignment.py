@@ -4,7 +4,7 @@
     http://www.atgc-montpellier.fr/phyml/usersguide.php?type=command
 """
 import logging
-log = logging.getLogger("")
+log = logging.getLogger("tigger.alignment")
 
 import os
 from pyparsing import (Word, OneOrMore, alphas, nums, Suppress, stringEnd,

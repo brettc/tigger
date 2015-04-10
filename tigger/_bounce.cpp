@@ -843,7 +843,7 @@ struct __pyx_obj_6tigger_7_bounce_TigerBase {
 };
 
 
-/* "tigger/_bounce.pyx":78
+/* "tigger/_bounce.pyx":83
  * 
  * 
  * cdef class TigerDNA(TigerBase):             # <<<<<<<<<<<<<<
@@ -1048,6 +1048,12 @@ static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
 
 static CYTHON_INLINE int __Pyx_CheckKeywordStrings(PyObject *kwdict, const char* function_name, int kw_allowed);
 
+static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
+
+static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[], \
+    PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args, \
+    const char* function_name);
+
 static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name);
 
 #if CYTHON_COMPILING_IN_CPYTHON
@@ -1101,12 +1107,6 @@ static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject 
 static CYTHON_INLINE void __Pyx_RaiseNoneNotIterableError(void);
 
 static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type);
-
-static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
-
-static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[], \
-    PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args, \
-    const char* function_name);
 
 static CYTHON_INLINE int __Pyx_ArgTypeTest(PyObject *obj, PyTypeObject *type, int none_allowed,
     const char *name, int exact);
@@ -1585,7 +1585,7 @@ static PyObject *__pyx_builtin_xrange;
 static PyObject *__pyx_builtin_id;
 static PyObject *__pyx_builtin_IndexError;
 static int __pyx_pf_6tigger_7_bounce_9TigerBase___cinit__(CYTHON_UNUSED struct __pyx_obj_6tigger_7_bounce_TigerBase *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_obj_6tigger_7_bounce_TigerBase *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_obj_6tigger_7_bounce_TigerBase *__pyx_v_self, size_t __pyx_v_feedback); /* proto */
 static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_4bitsets_as_array(struct __pyx_obj_6tigger_7_bounce_TigerBase *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_13species_count___get__(struct __pyx_obj_6tigger_7_bounce_TigerBase *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_12column_count___get__(struct __pyx_obj_6tigger_7_bounce_TigerBase *__pyx_v_self); /* proto */
@@ -1652,11 +1652,13 @@ static char __pyx_k_Zg[] = "Zg";
 static char __pyx_k_f8[] = "f8";
 static char __pyx_k_id[] = "id";
 static char __pyx_k_u1[] = "u1";
+static char __pyx_k_log[] = "log";
 static char __pyx_k_obj[] = "obj";
 static char __pyx_k_sys[] = "sys";
 static char __pyx_k_base[] = "base";
 static char __pyx_k_copy[] = "copy";
 static char __pyx_k_data[] = "data";
+static char __pyx_k_info[] = "info";
 static char __pyx_k_main[] = "__main__";
 static char __pyx_k_mode[] = "mode";
 static char __pyx_k_name[] = "name";
@@ -1682,20 +1684,25 @@ static char __pyx_k_struct[] = "struct";
 static char __pyx_k_unpack[] = "unpack";
 static char __pyx_k_xrange[] = "xrange";
 static char __pyx_k_fortran[] = "fortran";
+static char __pyx_k_logging[] = "logging";
 static char __pyx_k_memview[] = "memview";
 static char __pyx_k_Ellipsis[] = "Ellipsis";
+static char __pyx_k_feedback[] = "feedback";
 static char __pyx_k_itemsize[] = "itemsize";
 static char __pyx_k_TypeError[] = "TypeError";
 static char __pyx_k_enumerate[] = "enumerate";
+static char __pyx_k_getLogger[] = "getLogger";
 static char __pyx_k_IndexError[] = "IndexError";
 static char __pyx_k_ValueError[] = "ValueError";
 static char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static char __pyx_k_MemoryError[] = "MemoryError";
 static char __pyx_k_RuntimeError[] = "RuntimeError";
 static char __pyx_k_pyx_getbuffer[] = "__pyx_getbuffer";
+static char __pyx_k_tigger_analyis[] = "tigger.analyis";
 static char __pyx_k_allocate_buffer[] = "allocate_buffer";
 static char __pyx_k_dtype_is_object[] = "dtype_is_object";
 static char __pyx_k_strided_and_direct[] = "<strided and direct>";
+static char __pyx_k_Processing_column_d[] = "Processing column %d";
 static char __pyx_k_strided_and_indirect[] = "<strided and indirect>";
 static char __pyx_k_contiguous_and_direct[] = "<contiguous and direct>";
 static char __pyx_k_MemoryView_of_r_object[] = "<MemoryView of %r object>";
@@ -1744,6 +1751,7 @@ static PyObject *__pyx_kp_s_MemoryView_of_r_object;
 static PyObject *__pyx_kp_u_Non_native_byte_order_not_suppor;
 static PyObject *__pyx_n_b_O;
 static PyObject *__pyx_kp_s_Out_of_bounds_on_buffer_access_a;
+static PyObject *__pyx_kp_s_Processing_column_d;
 static PyObject *__pyx_n_s_RuntimeError;
 static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_kp_s_Unable_to_convert_item_to_object;
@@ -1762,15 +1770,20 @@ static PyObject *__pyx_n_s_dtype_is_object;
 static PyObject *__pyx_n_s_enumerate;
 static PyObject *__pyx_n_s_error;
 static PyObject *__pyx_n_s_f8;
+static PyObject *__pyx_n_s_feedback;
 static PyObject *__pyx_n_s_flags;
 static PyObject *__pyx_n_s_format;
 static PyObject *__pyx_n_s_fortran;
 static PyObject *__pyx_n_u_fortran;
+static PyObject *__pyx_n_s_getLogger;
 static PyObject *__pyx_kp_s_got_differing_extents_in_dimensi;
 static PyObject *__pyx_n_s_id;
 static PyObject *__pyx_n_s_import;
+static PyObject *__pyx_n_s_info;
 static PyObject *__pyx_n_s_itemsize;
 static PyObject *__pyx_kp_s_itemsize_0_for_cython_array;
+static PyObject *__pyx_n_s_log;
+static PyObject *__pyx_n_s_logging;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_memview;
 static PyObject *__pyx_n_s_mode;
@@ -1796,6 +1809,7 @@ static PyObject *__pyx_kp_s_strided_and_indirect;
 static PyObject *__pyx_n_s_struct;
 static PyObject *__pyx_n_s_sys;
 static PyObject *__pyx_n_s_test;
+static PyObject *__pyx_kp_s_tigger_analyis;
 static PyObject *__pyx_n_s_u1;
 static PyObject *__pyx_kp_s_unable_to_allocate_array_data;
 static PyObject *__pyx_kp_s_unable_to_allocate_shape_and_str;
@@ -1829,8 +1843,9 @@ static PyObject *__pyx_tuple__19;
 static PyObject *__pyx_tuple__20;
 static PyObject *__pyx_tuple__21;
 static PyObject *__pyx_tuple__22;
+static PyObject *__pyx_tuple__23;
 
-/* "tigger/_bounce.pyx":16
+/* "tigger/_bounce.pyx":19
  * 
  * cdef class TigerBase:
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -1865,28 +1880,75 @@ static int __pyx_pf_6tigger_7_bounce_9TigerBase___cinit__(CYTHON_UNUSED struct _
   return __pyx_r;
 }
 
-/* "tigger/_bounce.pyx":19
+/* "tigger/_bounce.pyx":22
  *         pass
  * 
- *     def calc_rates(self):             # <<<<<<<<<<<<<<
+ *     def calc_rates(self, size_t feedback=1000):             # <<<<<<<<<<<<<<
  *         if self.species_count == 0 or self.column_count == 0:
  *             return None
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6tigger_7_bounce_9TigerBase_3calc_rates(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_6tigger_7_bounce_9TigerBase_3calc_rates(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_6tigger_7_bounce_9TigerBase_3calc_rates(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_6tigger_7_bounce_9TigerBase_3calc_rates(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  size_t __pyx_v_feedback;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("calc_rates (wrapper)", 0);
-  __pyx_r = __pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(((struct __pyx_obj_6tigger_7_bounce_TigerBase *)__pyx_v_self));
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_feedback,0};
+    PyObject* values[1] = {0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (kw_args > 0) {
+          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_feedback);
+          if (value) { values[0] = value; kw_args--; }
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "calc_rates") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 22; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      }
+    } else {
+      switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+    }
+    if (values[0]) {
+      __pyx_v_feedback = __Pyx_PyInt_As_size_t(values[0]); if (unlikely((__pyx_v_feedback == (size_t)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 22; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    } else {
+      __pyx_v_feedback = ((size_t)1000);
+    }
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("calc_rates", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 22; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("tigger._bounce.TigerBase.calc_rates", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(((struct __pyx_obj_6tigger_7_bounce_TigerBase *)__pyx_v_self), __pyx_v_feedback);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_obj_6tigger_7_bounce_TigerBase *__pyx_v_self) {
+static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_obj_6tigger_7_bounce_TigerBase *__pyx_v_self, size_t __pyx_v_feedback) {
   PyObject *__pyx_v_rates = NULL;
   size_t __pyx_v_i;
   size_t __pyx_v_j;
@@ -1910,18 +1972,20 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_o
   __Pyx_memviewslice __pyx_t_7 = { 0, 0, { 0 }, { 0 }, { 0 } };
   size_t __pyx_t_8;
   size_t __pyx_t_9;
-  size_t __pyx_t_10;
-  size_t __pyx_t_11;
+  Py_ssize_t __pyx_t_10;
+  PyObject *__pyx_t_11 = NULL;
   size_t __pyx_t_12;
   size_t __pyx_t_13;
+  size_t __pyx_t_14;
+  size_t __pyx_t_15;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("calc_rates", 0);
 
-  /* "tigger/_bounce.pyx":20
+  /* "tigger/_bounce.pyx":23
  * 
- *     def calc_rates(self):
+ *     def calc_rates(self, size_t feedback=1000):
  *         if self.species_count == 0 or self.column_count == 0:             # <<<<<<<<<<<<<<
  *             return None
  * 
@@ -1937,8 +2001,8 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_o
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "tigger/_bounce.pyx":21
- *     def calc_rates(self):
+    /* "tigger/_bounce.pyx":24
+ *     def calc_rates(self, size_t feedback=1000):
  *         if self.species_count == 0 or self.column_count == 0:
  *             return None             # <<<<<<<<<<<<<<
  * 
@@ -1950,29 +2014,29 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_o
     goto __pyx_L0;
   }
 
-  /* "tigger/_bounce.pyx":23
+  /* "tigger/_bounce.pyx":26
  *             return None
  * 
  *         rates = numpy.zeros(self.column_count, dtype='f8')             # <<<<<<<<<<<<<<
  *         cdef:
  *             size_t i, j, i_b, j_b
  */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_numpy); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_numpy); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_zeros); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_zeros); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyInt_FromSize_t(__pyx_v_self->column_count); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_FromSize_t(__pyx_v_self->column_count); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_3);
   __pyx_t_3 = 0;
-  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_dtype, __pyx_n_s_f8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_dtype, __pyx_n_s_f8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -1980,7 +2044,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_o
   __pyx_v_rates = __pyx_t_6;
   __pyx_t_6 = 0;
 
-  /* "tigger/_bounce.pyx":29
+  /* "tigger/_bounce.pyx":32
  *             c_Bitset *i_bitset
  *             c_Bitset *j_bitset
  *             np.npy_double[:] c_rates = rates             # <<<<<<<<<<<<<<
@@ -1988,52 +2052,108 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_o
  *         denom = <double>self.column_count - 1.0
  */
   __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn_npy_double(__pyx_v_rates);
-  if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 29; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_c_rates = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "tigger/_bounce.pyx":31
+  /* "tigger/_bounce.pyx":34
  *             np.npy_double[:] c_rates = rates
  * 
  *         denom = <double>self.column_count - 1.0             # <<<<<<<<<<<<<<
  *         for i in range(self.column_count):
- *             rate = 0.0
+ *             if i % feedback == 0:
  */
   __pyx_v_denom = (((double)__pyx_v_self->column_count) - 1.0);
 
-  /* "tigger/_bounce.pyx":32
+  /* "tigger/_bounce.pyx":35
  * 
  *         denom = <double>self.column_count - 1.0
  *         for i in range(self.column_count):             # <<<<<<<<<<<<<<
- *             rate = 0.0
- *             for j in range(self.column_count):
+ *             if i % feedback == 0:
+ *                 log.info("Processing column %d", i)
  */
   __pyx_t_8 = __pyx_v_self->column_count;
   for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
     __pyx_v_i = __pyx_t_9;
 
-    /* "tigger/_bounce.pyx":33
+    /* "tigger/_bounce.pyx":36
  *         denom = <double>self.column_count - 1.0
  *         for i in range(self.column_count):
+ *             if i % feedback == 0:             # <<<<<<<<<<<<<<
+ *                 log.info("Processing column %d", i)
+ *             rate = 0.0
+ */
+    __pyx_t_1 = (((__pyx_v_i % __pyx_v_feedback) == 0) != 0);
+    if (__pyx_t_1) {
+
+      /* "tigger/_bounce.pyx":37
+ *         for i in range(self.column_count):
+ *             if i % feedback == 0:
+ *                 log.info("Processing column %d", i)             # <<<<<<<<<<<<<<
+ *             rate = 0.0
+ *             for j in range(self.column_count):
+ */
+      __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_log); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_3);
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_info); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_5);
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __pyx_t_3 = __Pyx_PyInt_FromSize_t(__pyx_v_i); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_3);
+      __pyx_t_4 = NULL;
+      __pyx_t_10 = 0;
+      if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_5))) {
+        __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_5);
+        if (likely(__pyx_t_4)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
+          __Pyx_INCREF(__pyx_t_4);
+          __Pyx_INCREF(function);
+          __Pyx_DECREF_SET(__pyx_t_5, function);
+          __pyx_t_10 = 1;
+        }
+      }
+      __pyx_t_11 = PyTuple_New(2+__pyx_t_10); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_11);
+      if (__pyx_t_4) {
+        PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_4); __Pyx_GIVEREF(__pyx_t_4); __pyx_t_4 = NULL;
+      }
+      __Pyx_INCREF(__pyx_kp_s_Processing_column_d);
+      PyTuple_SET_ITEM(__pyx_t_11, 0+__pyx_t_10, __pyx_kp_s_Processing_column_d);
+      __Pyx_GIVEREF(__pyx_kp_s_Processing_column_d);
+      PyTuple_SET_ITEM(__pyx_t_11, 1+__pyx_t_10, __pyx_t_3);
+      __Pyx_GIVEREF(__pyx_t_3);
+      __pyx_t_3 = 0;
+      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_11, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_6);
+      __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      goto __pyx_L8;
+    }
+    __pyx_L8:;
+
+    /* "tigger/_bounce.pyx":38
+ *             if i % feedback == 0:
+ *                 log.info("Processing column %d", i)
  *             rate = 0.0             # <<<<<<<<<<<<<<
  *             for j in range(self.column_count):
  *                 # Don't compare to self
  */
     __pyx_v_rate = 0.0;
 
-    /* "tigger/_bounce.pyx":34
- *         for i in range(self.column_count):
+    /* "tigger/_bounce.pyx":39
+ *                 log.info("Processing column %d", i)
  *             rate = 0.0
  *             for j in range(self.column_count):             # <<<<<<<<<<<<<<
  *                 # Don't compare to self
  *                 if i == j:
  */
-    __pyx_t_10 = __pyx_v_self->column_count;
-    for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
-      __pyx_v_j = __pyx_t_11;
+    __pyx_t_12 = __pyx_v_self->column_count;
+    for (__pyx_t_13 = 0; __pyx_t_13 < __pyx_t_12; __pyx_t_13+=1) {
+      __pyx_v_j = __pyx_t_13;
 
-      /* "tigger/_bounce.pyx":36
+      /* "tigger/_bounce.pyx":41
  *             for j in range(self.column_count):
  *                 # Don't compare to self
  *                 if i == j:             # <<<<<<<<<<<<<<
@@ -2043,17 +2163,17 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_o
       __pyx_t_1 = ((__pyx_v_i == __pyx_v_j) != 0);
       if (__pyx_t_1) {
 
-        /* "tigger/_bounce.pyx":37
+        /* "tigger/_bounce.pyx":42
  *                 # Don't compare to self
  *                 if i == j:
  *                     continue             # <<<<<<<<<<<<<<
  * 
  *                 num = 0.0
  */
-        goto __pyx_L8_continue;
+        goto __pyx_L9_continue;
       }
 
-      /* "tigger/_bounce.pyx":39
+      /* "tigger/_bounce.pyx":44
  *                     continue
  * 
  *                 num = 0.0             # <<<<<<<<<<<<<<
@@ -2062,7 +2182,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_o
  */
       __pyx_v_num = 0.0;
 
-      /* "tigger/_bounce.pyx":40
+      /* "tigger/_bounce.pyx":45
  * 
  *                 num = 0.0
  *                 axpi = 0.0             # <<<<<<<<<<<<<<
@@ -2071,17 +2191,17 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_o
  */
       __pyx_v_axpi = 0.0;
 
-      /* "tigger/_bounce.pyx":41
+      /* "tigger/_bounce.pyx":46
  *                 num = 0.0
  *                 axpi = 0.0
  *                 for j_b in range(4):             # <<<<<<<<<<<<<<
  *                     j_bitset = &self._bitsets[j][j_b]
  *                     if j_bitset.none():
  */
-      for (__pyx_t_12 = 0; __pyx_t_12 < 4; __pyx_t_12+=1) {
-        __pyx_v_j_b = __pyx_t_12;
+      for (__pyx_t_14 = 0; __pyx_t_14 < 4; __pyx_t_14+=1) {
+        __pyx_v_j_b = __pyx_t_14;
 
-        /* "tigger/_bounce.pyx":42
+        /* "tigger/_bounce.pyx":47
  *                 axpi = 0.0
  *                 for j_b in range(4):
  *                     j_bitset = &self._bitsets[j][j_b]             # <<<<<<<<<<<<<<
@@ -2090,7 +2210,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_o
  */
         __pyx_v_j_bitset = (&((__pyx_v_self->_bitsets[__pyx_v_j])[__pyx_v_j_b]));
 
-        /* "tigger/_bounce.pyx":43
+        /* "tigger/_bounce.pyx":48
  *                 for j_b in range(4):
  *                     j_bitset = &self._bitsets[j][j_b]
  *                     if j_bitset.none():             # <<<<<<<<<<<<<<
@@ -2100,17 +2220,17 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_o
         __pyx_t_1 = (__pyx_v_j_bitset->none() != 0);
         if (__pyx_t_1) {
 
-          /* "tigger/_bounce.pyx":44
+          /* "tigger/_bounce.pyx":49
  *                     j_bitset = &self._bitsets[j][j_b]
  *                     if j_bitset.none():
  *                         continue             # <<<<<<<<<<<<<<
  *                     num += 1.0
  *                     for i_b in range(4):
  */
-          goto __pyx_L11_continue;
+          goto __pyx_L12_continue;
         }
 
-        /* "tigger/_bounce.pyx":45
+        /* "tigger/_bounce.pyx":50
  *                     if j_bitset.none():
  *                         continue
  *                     num += 1.0             # <<<<<<<<<<<<<<
@@ -2119,17 +2239,17 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_o
  */
         __pyx_v_num = (__pyx_v_num + 1.0);
 
-        /* "tigger/_bounce.pyx":46
+        /* "tigger/_bounce.pyx":51
  *                         continue
  *                     num += 1.0
  *                     for i_b in range(4):             # <<<<<<<<<<<<<<
  *                         i_bitset = &self._bitsets[i][i_b]
  *                         if i_bitset.none():
  */
-        for (__pyx_t_13 = 0; __pyx_t_13 < 4; __pyx_t_13+=1) {
-          __pyx_v_i_b = __pyx_t_13;
+        for (__pyx_t_15 = 0; __pyx_t_15 < 4; __pyx_t_15+=1) {
+          __pyx_v_i_b = __pyx_t_15;
 
-          /* "tigger/_bounce.pyx":47
+          /* "tigger/_bounce.pyx":52
  *                     num += 1.0
  *                     for i_b in range(4):
  *                         i_bitset = &self._bitsets[i][i_b]             # <<<<<<<<<<<<<<
@@ -2138,7 +2258,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_o
  */
           __pyx_v_i_bitset = (&((__pyx_v_self->_bitsets[__pyx_v_i])[__pyx_v_i_b]));
 
-          /* "tigger/_bounce.pyx":48
+          /* "tigger/_bounce.pyx":53
  *                     for i_b in range(4):
  *                         i_bitset = &self._bitsets[i][i_b]
  *                         if i_bitset.none():             # <<<<<<<<<<<<<<
@@ -2148,17 +2268,17 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_o
           __pyx_t_1 = (__pyx_v_i_bitset->none() != 0);
           if (__pyx_t_1) {
 
-            /* "tigger/_bounce.pyx":49
+            /* "tigger/_bounce.pyx":54
  *                         i_bitset = &self._bitsets[i][i_b]
  *                         if i_bitset.none():
  *                             continue             # <<<<<<<<<<<<<<
  *                         if j_bitset.is_subset_of(deref(i_bitset)):
  *                             axpi += 1.0
  */
-            goto __pyx_L14_continue;
+            goto __pyx_L15_continue;
           }
 
-          /* "tigger/_bounce.pyx":50
+          /* "tigger/_bounce.pyx":55
  *                         if i_bitset.none():
  *                             continue
  *                         if j_bitset.is_subset_of(deref(i_bitset)):             # <<<<<<<<<<<<<<
@@ -2168,7 +2288,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_o
           __pyx_t_1 = (__pyx_v_j_bitset->is_subset_of((*__pyx_v_i_bitset)) != 0);
           if (__pyx_t_1) {
 
-            /* "tigger/_bounce.pyx":51
+            /* "tigger/_bounce.pyx":56
  *                             continue
  *                         if j_bitset.is_subset_of(deref(i_bitset)):
  *                             axpi += 1.0             # <<<<<<<<<<<<<<
@@ -2177,22 +2297,22 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_o
  */
             __pyx_v_axpi = (__pyx_v_axpi + 1.0);
 
-            /* "tigger/_bounce.pyx":52
+            /* "tigger/_bounce.pyx":57
  *                         if j_bitset.is_subset_of(deref(i_bitset)):
  *                             axpi += 1.0
  *                             break             # <<<<<<<<<<<<<<
  * 
  *                 rate += axpi / num
  */
-            goto __pyx_L15_break;
+            goto __pyx_L16_break;
           }
-          __pyx_L14_continue:;
+          __pyx_L15_continue:;
         }
-        __pyx_L15_break:;
-        __pyx_L11_continue:;
+        __pyx_L16_break:;
+        __pyx_L12_continue:;
       }
 
-      /* "tigger/_bounce.pyx":54
+      /* "tigger/_bounce.pyx":59
  *                             break
  * 
  *                 rate += axpi / num             # <<<<<<<<<<<<<<
@@ -2200,10 +2320,10 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_o
  *             rate /= denom
  */
       __pyx_v_rate = (__pyx_v_rate + (__pyx_v_axpi / __pyx_v_num));
-      __pyx_L8_continue:;
+      __pyx_L9_continue:;
     }
 
-    /* "tigger/_bounce.pyx":56
+    /* "tigger/_bounce.pyx":61
  *                 rate += axpi / num
  * 
  *             rate /= denom             # <<<<<<<<<<<<<<
@@ -2212,18 +2332,18 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_o
  */
     __pyx_v_rate = (__pyx_v_rate / __pyx_v_denom);
 
-    /* "tigger/_bounce.pyx":57
+    /* "tigger/_bounce.pyx":62
  * 
  *             rate /= denom
  *             c_rates[i] = rate             # <<<<<<<<<<<<<<
  * 
  *         return rates
  */
-    __pyx_t_10 = __pyx_v_i;
-    *((npy_double *) ( /* dim=0 */ (__pyx_v_c_rates.data + __pyx_t_10 * __pyx_v_c_rates.strides[0]) )) = __pyx_v_rate;
+    __pyx_t_12 = __pyx_v_i;
+    *((npy_double *) ( /* dim=0 */ (__pyx_v_c_rates.data + __pyx_t_12 * __pyx_v_c_rates.strides[0]) )) = __pyx_v_rate;
   }
 
-  /* "tigger/_bounce.pyx":59
+  /* "tigger/_bounce.pyx":64
  *             c_rates[i] = rate
  * 
  *         return rates             # <<<<<<<<<<<<<<
@@ -2235,10 +2355,10 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_o
   __pyx_r = __pyx_v_rates;
   goto __pyx_L0;
 
-  /* "tigger/_bounce.pyx":19
+  /* "tigger/_bounce.pyx":22
  *         pass
  * 
- *     def calc_rates(self):             # <<<<<<<<<<<<<<
+ *     def calc_rates(self, size_t feedback=1000):             # <<<<<<<<<<<<<<
  *         if self.species_count == 0 or self.column_count == 0:
  *             return None
  */
@@ -2250,6 +2370,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_o
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
+  __Pyx_XDECREF(__pyx_t_11);
   __Pyx_AddTraceback("tigger._bounce.TigerBase.calc_rates", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -2260,7 +2381,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_2calc_rates(struct __pyx_o
   return __pyx_r;
 }
 
-/* "tigger/_bounce.pyx":61
+/* "tigger/_bounce.pyx":66
  *         return rates
  * 
  *     def bitsets_as_array(self):             # <<<<<<<<<<<<<<
@@ -2309,7 +2430,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_4bitsets_as_array(struct _
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("bitsets_as_array", 0);
 
-  /* "tigger/_bounce.pyx":62
+  /* "tigger/_bounce.pyx":67
  * 
  *     def bitsets_as_array(self):
  *         if self.species_count == 0 or self.column_count == 0:             # <<<<<<<<<<<<<<
@@ -2327,7 +2448,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_4bitsets_as_array(struct _
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "tigger/_bounce.pyx":63
+    /* "tigger/_bounce.pyx":68
  *     def bitsets_as_array(self):
  *         if self.species_count == 0 or self.column_count == 0:
  *             return None             # <<<<<<<<<<<<<<
@@ -2340,23 +2461,23 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_4bitsets_as_array(struct _
     goto __pyx_L0;
   }
 
-  /* "tigger/_bounce.pyx":65
+  /* "tigger/_bounce.pyx":70
  *             return None
  * 
  *         ret = numpy.zeros((self.column_count, 4, self.species_count), dtype='u1')             # <<<<<<<<<<<<<<
  *         cdef:
  *             np.npy_uint8[:, :, :] c_ret = ret
  */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_numpy); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 65; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_numpy); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_zeros); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 65; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_zeros); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyInt_FromSize_t(__pyx_v_self->column_count); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 65; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_FromSize_t(__pyx_v_self->column_count); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_PyInt_FromSize_t(__pyx_v_self->species_count); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 65; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyInt_FromSize_t(__pyx_v_self->species_count); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 65; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_3);
@@ -2367,15 +2488,15 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_4bitsets_as_array(struct _
   __Pyx_GIVEREF(__pyx_t_5);
   __pyx_t_3 = 0;
   __pyx_t_5 = 0;
-  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 65; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_6);
   __Pyx_GIVEREF(__pyx_t_6);
   __pyx_t_6 = 0;
-  __pyx_t_6 = PyDict_New(); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 65; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = PyDict_New(); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_dtype, __pyx_n_s_u1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 65; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 65; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_dtype, __pyx_n_s_u1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -2383,7 +2504,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_4bitsets_as_array(struct _
   __pyx_v_ret = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "tigger/_bounce.pyx":67
+  /* "tigger/_bounce.pyx":72
  *         ret = numpy.zeros((self.column_count, 4, self.species_count), dtype='u1')
  *         cdef:
  *             np.npy_uint8[:, :, :] c_ret = ret             # <<<<<<<<<<<<<<
@@ -2391,12 +2512,12 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_4bitsets_as_array(struct _
  * 
  */
   __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dsdsds_nn_npy_uint8(__pyx_v_ret);
-  if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 67; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 72; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_c_ret = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "tigger/_bounce.pyx":70
+  /* "tigger/_bounce.pyx":75
  *             size_t i, j, k
  * 
  *         for i in range(self.column_count):             # <<<<<<<<<<<<<<
@@ -2407,7 +2528,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_4bitsets_as_array(struct _
   for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
     __pyx_v_i = __pyx_t_9;
 
-    /* "tigger/_bounce.pyx":71
+    /* "tigger/_bounce.pyx":76
  * 
  *         for i in range(self.column_count):
  *             for j in range(4):             # <<<<<<<<<<<<<<
@@ -2417,7 +2538,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_4bitsets_as_array(struct _
     for (__pyx_t_10 = 0; __pyx_t_10 < 4; __pyx_t_10+=1) {
       __pyx_v_j = __pyx_t_10;
 
-      /* "tigger/_bounce.pyx":72
+      /* "tigger/_bounce.pyx":77
  *         for i in range(self.column_count):
  *             for j in range(4):
  *                 for k in range(self.species_count):             # <<<<<<<<<<<<<<
@@ -2428,7 +2549,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_4bitsets_as_array(struct _
       for (__pyx_t_12 = 0; __pyx_t_12 < __pyx_t_11; __pyx_t_12+=1) {
         __pyx_v_k = __pyx_t_12;
 
-        /* "tigger/_bounce.pyx":73
+        /* "tigger/_bounce.pyx":78
  *             for j in range(4):
  *                 for k in range(self.species_count):
  *                     if self._bitsets[i][j].test(k):             # <<<<<<<<<<<<<<
@@ -2438,7 +2559,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_4bitsets_as_array(struct _
         __pyx_t_1 = (((__pyx_v_self->_bitsets[__pyx_v_i])[__pyx_v_j]).test(__pyx_v_k) != 0);
         if (__pyx_t_1) {
 
-          /* "tigger/_bounce.pyx":74
+          /* "tigger/_bounce.pyx":79
  *                 for k in range(self.species_count):
  *                     if self._bitsets[i][j].test(k):
  *                         c_ret[i, j, k] = 1             # <<<<<<<<<<<<<<
@@ -2456,7 +2577,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_4bitsets_as_array(struct _
     }
   }
 
-  /* "tigger/_bounce.pyx":75
+  /* "tigger/_bounce.pyx":80
  *                     if self._bitsets[i][j].test(k):
  *                         c_ret[i, j, k] = 1
  *         return ret             # <<<<<<<<<<<<<<
@@ -2468,7 +2589,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_4bitsets_as_array(struct _
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "tigger/_bounce.pyx":61
+  /* "tigger/_bounce.pyx":66
  *         return rates
  * 
  *     def bitsets_as_array(self):             # <<<<<<<<<<<<<<
@@ -2577,7 +2698,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_9TigerBase_12column_count___get__(str
   return __pyx_r;
 }
 
-/* "tigger/_bounce.pyx":79
+/* "tigger/_bounce.pyx":84
  * 
  * cdef class TigerDNA(TigerBase):
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -2606,7 +2727,7 @@ static int __pyx_pf_6tigger_7_bounce_8TigerDNA___cinit__(struct __pyx_obj_6tigge
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "tigger/_bounce.pyx":80
+  /* "tigger/_bounce.pyx":85
  * cdef class TigerDNA(TigerBase):
  *     def __cinit__(self):
  *         self.species_count = 0             # <<<<<<<<<<<<<<
@@ -2615,7 +2736,7 @@ static int __pyx_pf_6tigger_7_bounce_8TigerDNA___cinit__(struct __pyx_obj_6tigge
  */
   __pyx_v_self->__pyx_base.species_count = 0;
 
-  /* "tigger/_bounce.pyx":81
+  /* "tigger/_bounce.pyx":86
  *     def __cinit__(self):
  *         self.species_count = 0
  *         self.column_count = 0             # <<<<<<<<<<<<<<
@@ -2624,7 +2745,7 @@ static int __pyx_pf_6tigger_7_bounce_8TigerDNA___cinit__(struct __pyx_obj_6tigge
  */
   __pyx_v_self->__pyx_base.column_count = 0;
 
-  /* "tigger/_bounce.pyx":79
+  /* "tigger/_bounce.pyx":84
  * 
  * cdef class TigerDNA(TigerBase):
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -2638,7 +2759,7 @@ static int __pyx_pf_6tigger_7_bounce_8TigerDNA___cinit__(struct __pyx_obj_6tigge
   return __pyx_r;
 }
 
-/* "tigger/_bounce.pyx":83
+/* "tigger/_bounce.pyx":88
  *         self.column_count = 0
  * 
  *     def build_bitsets(self, alignment):             # <<<<<<<<<<<<<<
@@ -2691,32 +2812,32 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("build_bitsets", 0);
 
-  /* "tigger/_bounce.pyx":86
+  /* "tigger/_bounce.pyx":91
  *         cdef:
  *             size_t i, j, k, sp_count, col_count
  *             np.npy_uint8[:, :] data = alignment.data             # <<<<<<<<<<<<<<
  *             unsigned char c
  *             c_Bitset *A_bits
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_alignment, __pyx_n_s_data); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_alignment, __pyx_n_s_data); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn_npy_uint8(__pyx_t_1);
-  if (unlikely(!__pyx_t_2.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__pyx_t_2.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_data = __pyx_t_2;
   __pyx_t_2.memview = NULL;
   __pyx_t_2.data = NULL;
 
-  /* "tigger/_bounce.pyx":93
+  /* "tigger/_bounce.pyx":98
  *             c_Bitset *T_bits
  * 
  *         sp_count, col_count = alignment.data.shape             # <<<<<<<<<<<<<<
  *         self.species_count = sp_count
  *         self.column_count = col_count
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_alignment, __pyx_n_s_data); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_alignment, __pyx_n_s_data); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_shape); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_shape); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if ((likely(PyTuple_CheckExact(__pyx_t_3))) || (PyList_CheckExact(__pyx_t_3))) {
@@ -2729,7 +2850,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
     if (unlikely(size != 2)) {
       if (size > 2) __Pyx_RaiseTooManyValuesError(2);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     #if CYTHON_COMPILING_IN_CPYTHON
     if (likely(PyTuple_CheckExact(sequence))) {
@@ -2742,15 +2863,15 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
     __Pyx_INCREF(__pyx_t_1);
     __Pyx_INCREF(__pyx_t_4);
     #else
-    __pyx_t_1 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     #endif
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
     Py_ssize_t index = -1;
-    __pyx_t_5 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_6 = Py_TYPE(__pyx_t_5)->tp_iternext;
@@ -2758,7 +2879,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
     __Pyx_GOTREF(__pyx_t_1);
     index = 1; __pyx_t_4 = __pyx_t_6(__pyx_t_5); if (unlikely(!__pyx_t_4)) goto __pyx_L3_unpacking_failed;
     __Pyx_GOTREF(__pyx_t_4);
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_6(__pyx_t_5), 2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_6(__pyx_t_5), 2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_t_6 = NULL;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     goto __pyx_L4_unpacking_done;
@@ -2766,17 +2887,17 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_6 = NULL;
     if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_L4_unpacking_done:;
   }
-  __pyx_t_7 = __Pyx_PyInt_As_size_t(__pyx_t_1); if (unlikely((__pyx_t_7 == (size_t)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyInt_As_size_t(__pyx_t_1); if (unlikely((__pyx_t_7 == (size_t)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_8 = __Pyx_PyInt_As_size_t(__pyx_t_4); if (unlikely((__pyx_t_8 == (size_t)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_PyInt_As_size_t(__pyx_t_4); if (unlikely((__pyx_t_8 == (size_t)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_sp_count = __pyx_t_7;
   __pyx_v_col_count = __pyx_t_8;
 
-  /* "tigger/_bounce.pyx":94
+  /* "tigger/_bounce.pyx":99
  * 
  *         sp_count, col_count = alignment.data.shape
  *         self.species_count = sp_count             # <<<<<<<<<<<<<<
@@ -2785,7 +2906,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
  */
   __pyx_v_self->__pyx_base.species_count = __pyx_v_sp_count;
 
-  /* "tigger/_bounce.pyx":95
+  /* "tigger/_bounce.pyx":100
  *         sp_count, col_count = alignment.data.shape
  *         self.species_count = sp_count
  *         self.column_count = col_count             # <<<<<<<<<<<<<<
@@ -2794,7 +2915,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
  */
   __pyx_v_self->__pyx_base.column_count = __pyx_v_col_count;
 
-  /* "tigger/_bounce.pyx":99
+  /* "tigger/_bounce.pyx":104
  *         # Create all the bitsets
  *         # NOTE: would be better if we could rely on emplace_back...
  *         for i in range(col_count):             # <<<<<<<<<<<<<<
@@ -2805,7 +2926,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
   for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_8; __pyx_t_7+=1) {
     __pyx_v_i = __pyx_t_7;
 
-    /* "tigger/_bounce.pyx":100
+    /* "tigger/_bounce.pyx":105
  *         # NOTE: would be better if we could rely on emplace_back...
  *         for i in range(col_count):
  *             self._bitsets.push_back(c_ColumnBitsets())             # <<<<<<<<<<<<<<
@@ -2816,11 +2937,11 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
       __pyx_t_9 = __pyx_t_6tigger_7_bounce_c_ColumnBitsets();
     } catch(...) {
       __Pyx_CppExn2PyErr();
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     __pyx_v_self->__pyx_base._bitsets.push_back(__pyx_t_9);
 
-    /* "tigger/_bounce.pyx":101
+    /* "tigger/_bounce.pyx":106
  *         for i in range(col_count):
  *             self._bitsets.push_back(c_ColumnBitsets())
  *             for k in range(4):             # <<<<<<<<<<<<<<
@@ -2830,7 +2951,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
     for (__pyx_t_10 = 0; __pyx_t_10 < 4; __pyx_t_10+=1) {
       __pyx_v_k = __pyx_t_10;
 
-      /* "tigger/_bounce.pyx":102
+      /* "tigger/_bounce.pyx":107
  *             self._bitsets.push_back(c_ColumnBitsets())
  *             for k in range(4):
  *                 self._bitsets.back().push_back(c_Bitset(sp_count))             # <<<<<<<<<<<<<<
@@ -2841,7 +2962,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
     }
   }
 
-  /* "tigger/_bounce.pyx":104
+  /* "tigger/_bounce.pyx":109
  *                 self._bitsets.back().push_back(c_Bitset(sp_count))
  * 
  *         for i in range(col_count):             # <<<<<<<<<<<<<<
@@ -2852,7 +2973,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
   for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_8; __pyx_t_7+=1) {
     __pyx_v_i = __pyx_t_7;
 
-    /* "tigger/_bounce.pyx":105
+    /* "tigger/_bounce.pyx":110
  * 
  *         for i in range(col_count):
  *             A_bits = &self._bitsets[i][0]             # <<<<<<<<<<<<<<
@@ -2861,7 +2982,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
  */
     __pyx_v_A_bits = (&((__pyx_v_self->__pyx_base._bitsets[__pyx_v_i])[0]));
 
-    /* "tigger/_bounce.pyx":106
+    /* "tigger/_bounce.pyx":111
  *         for i in range(col_count):
  *             A_bits = &self._bitsets[i][0]
  *             C_bits = &self._bitsets[i][1]             # <<<<<<<<<<<<<<
@@ -2870,7 +2991,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
  */
     __pyx_v_C_bits = (&((__pyx_v_self->__pyx_base._bitsets[__pyx_v_i])[1]));
 
-    /* "tigger/_bounce.pyx":107
+    /* "tigger/_bounce.pyx":112
  *             A_bits = &self._bitsets[i][0]
  *             C_bits = &self._bitsets[i][1]
  *             G_bits = &self._bitsets[i][2]             # <<<<<<<<<<<<<<
@@ -2879,7 +3000,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
  */
     __pyx_v_G_bits = (&((__pyx_v_self->__pyx_base._bitsets[__pyx_v_i])[2]));
 
-    /* "tigger/_bounce.pyx":108
+    /* "tigger/_bounce.pyx":113
  *             C_bits = &self._bitsets[i][1]
  *             G_bits = &self._bitsets[i][2]
  *             T_bits = &self._bitsets[i][3]             # <<<<<<<<<<<<<<
@@ -2888,7 +3009,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
  */
     __pyx_v_T_bits = (&((__pyx_v_self->__pyx_base._bitsets[__pyx_v_i])[3]));
 
-    /* "tigger/_bounce.pyx":109
+    /* "tigger/_bounce.pyx":114
  *             G_bits = &self._bitsets[i][2]
  *             T_bits = &self._bitsets[i][3]
  *             for j in range(sp_count):             # <<<<<<<<<<<<<<
@@ -2899,7 +3020,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
     for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
       __pyx_v_j = __pyx_t_11;
 
-      /* "tigger/_bounce.pyx":110
+      /* "tigger/_bounce.pyx":115
  *             T_bits = &self._bitsets[i][3]
  *             for j in range(sp_count):
  *                 c = data[j, i]             # <<<<<<<<<<<<<<
@@ -2910,7 +3031,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
       __pyx_t_13 = __pyx_v_i;
       __pyx_v_c = (*((npy_uint8 *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_data.data + __pyx_t_12 * __pyx_v_data.strides[0]) ) + __pyx_t_13 * __pyx_v_data.strides[1]) )));
 
-      /* "tigger/_bounce.pyx":119
+      /* "tigger/_bounce.pyx":124
  *                 elif c == 'T':
  *                     T_bits.set(j)
  *                 elif c == 'N' or c == '?' or c == '-':             # <<<<<<<<<<<<<<
@@ -2919,7 +3040,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
  */
       switch (__pyx_v_c) {
 
-        /* "tigger/_bounce.pyx":111
+        /* "tigger/_bounce.pyx":116
  *             for j in range(sp_count):
  *                 c = data[j, i]
  *                 if c == 'A':             # <<<<<<<<<<<<<<
@@ -2928,7 +3049,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
  */
         case 'A':
 
-        /* "tigger/_bounce.pyx":112
+        /* "tigger/_bounce.pyx":117
  *                 c = data[j, i]
  *                 if c == 'A':
  *                     A_bits.set(j)             # <<<<<<<<<<<<<<
@@ -2938,7 +3059,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
         __pyx_v_A_bits->set(__pyx_v_j);
         break;
 
-        /* "tigger/_bounce.pyx":113
+        /* "tigger/_bounce.pyx":118
  *                 if c == 'A':
  *                     A_bits.set(j)
  *                 elif c == 'C':             # <<<<<<<<<<<<<<
@@ -2947,7 +3068,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
  */
         case 'C':
 
-        /* "tigger/_bounce.pyx":114
+        /* "tigger/_bounce.pyx":119
  *                     A_bits.set(j)
  *                 elif c == 'C':
  *                     C_bits.set(j)             # <<<<<<<<<<<<<<
@@ -2957,7 +3078,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
         __pyx_v_C_bits->set(__pyx_v_j);
         break;
 
-        /* "tigger/_bounce.pyx":115
+        /* "tigger/_bounce.pyx":120
  *                 elif c == 'C':
  *                     C_bits.set(j)
  *                 elif c == 'G':             # <<<<<<<<<<<<<<
@@ -2966,7 +3087,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
  */
         case 'G':
 
-        /* "tigger/_bounce.pyx":116
+        /* "tigger/_bounce.pyx":121
  *                     C_bits.set(j)
  *                 elif c == 'G':
  *                     G_bits.set(j)             # <<<<<<<<<<<<<<
@@ -2976,7 +3097,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
         __pyx_v_G_bits->set(__pyx_v_j);
         break;
 
-        /* "tigger/_bounce.pyx":117
+        /* "tigger/_bounce.pyx":122
  *                 elif c == 'G':
  *                     G_bits.set(j)
  *                 elif c == 'T':             # <<<<<<<<<<<<<<
@@ -2985,7 +3106,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
  */
         case 'T':
 
-        /* "tigger/_bounce.pyx":118
+        /* "tigger/_bounce.pyx":123
  *                     G_bits.set(j)
  *                 elif c == 'T':
  *                     T_bits.set(j)             # <<<<<<<<<<<<<<
@@ -2995,7 +3116,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
         __pyx_v_T_bits->set(__pyx_v_j);
         break;
 
-        /* "tigger/_bounce.pyx":119
+        /* "tigger/_bounce.pyx":124
  *                 elif c == 'T':
  *                     T_bits.set(j)
  *                 elif c == 'N' or c == '?' or c == '-':             # <<<<<<<<<<<<<<
@@ -3006,7 +3127,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
         case '?':
         case '-':
 
-        /* "tigger/_bounce.pyx":120
+        /* "tigger/_bounce.pyx":125
  *                     T_bits.set(j)
  *                 elif c == 'N' or c == '?' or c == '-':
  *                     A_bits.set(j)             # <<<<<<<<<<<<<<
@@ -3015,7 +3136,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
  */
         __pyx_v_A_bits->set(__pyx_v_j);
 
-        /* "tigger/_bounce.pyx":121
+        /* "tigger/_bounce.pyx":126
  *                 elif c == 'N' or c == '?' or c == '-':
  *                     A_bits.set(j)
  *                     C_bits.set(j)             # <<<<<<<<<<<<<<
@@ -3024,7 +3145,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
  */
         __pyx_v_C_bits->set(__pyx_v_j);
 
-        /* "tigger/_bounce.pyx":122
+        /* "tigger/_bounce.pyx":127
  *                     A_bits.set(j)
  *                     C_bits.set(j)
  *                     G_bits.set(j)             # <<<<<<<<<<<<<<
@@ -3033,7 +3154,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
  */
         __pyx_v_G_bits->set(__pyx_v_j);
 
-        /* "tigger/_bounce.pyx":123
+        /* "tigger/_bounce.pyx":128
  *                     C_bits.set(j)
  *                     G_bits.set(j)
  *                     T_bits.set(j)             # <<<<<<<<<<<<<<
@@ -3047,7 +3168,7 @@ static PyObject *__pyx_pf_6tigger_7_bounce_8TigerDNA_2build_bitsets(struct __pyx
     }
   }
 
-  /* "tigger/_bounce.pyx":83
+  /* "tigger/_bounce.pyx":88
  *         self.column_count = 0
  * 
  *     def build_bitsets(self, alignment):             # <<<<<<<<<<<<<<
@@ -15742,7 +15863,7 @@ static PyObject *__pyx_getprop_6tigger_7_bounce_9TigerBase_column_count(PyObject
 }
 
 static PyMethodDef __pyx_methods_6tigger_7_bounce_TigerBase[] = {
-  {"calc_rates", (PyCFunction)__pyx_pw_6tigger_7_bounce_9TigerBase_3calc_rates, METH_NOARGS, 0},
+  {"calc_rates", (PyCFunction)__pyx_pw_6tigger_7_bounce_9TigerBase_3calc_rates, METH_VARARGS|METH_KEYWORDS, 0},
   {"bitsets_as_array", (PyCFunction)__pyx_pw_6tigger_7_bounce_9TigerBase_5bitsets_as_array, METH_NOARGS, 0},
   {0, 0, 0, 0}
 };
@@ -16576,6 +16697,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_u_Non_native_byte_order_not_suppor, __pyx_k_Non_native_byte_order_not_suppor, sizeof(__pyx_k_Non_native_byte_order_not_suppor), 0, 1, 0, 0},
   {&__pyx_n_b_O, __pyx_k_O, sizeof(__pyx_k_O), 0, 0, 0, 1},
   {&__pyx_kp_s_Out_of_bounds_on_buffer_access_a, __pyx_k_Out_of_bounds_on_buffer_access_a, sizeof(__pyx_k_Out_of_bounds_on_buffer_access_a), 0, 0, 1, 0},
+  {&__pyx_kp_s_Processing_column_d, __pyx_k_Processing_column_d, sizeof(__pyx_k_Processing_column_d), 0, 0, 1, 0},
   {&__pyx_n_s_RuntimeError, __pyx_k_RuntimeError, sizeof(__pyx_k_RuntimeError), 0, 0, 1, 1},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
   {&__pyx_kp_s_Unable_to_convert_item_to_object, __pyx_k_Unable_to_convert_item_to_object, sizeof(__pyx_k_Unable_to_convert_item_to_object), 0, 0, 1, 0},
@@ -16594,15 +16716,20 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_enumerate, __pyx_k_enumerate, sizeof(__pyx_k_enumerate), 0, 0, 1, 1},
   {&__pyx_n_s_error, __pyx_k_error, sizeof(__pyx_k_error), 0, 0, 1, 1},
   {&__pyx_n_s_f8, __pyx_k_f8, sizeof(__pyx_k_f8), 0, 0, 1, 1},
+  {&__pyx_n_s_feedback, __pyx_k_feedback, sizeof(__pyx_k_feedback), 0, 0, 1, 1},
   {&__pyx_n_s_flags, __pyx_k_flags, sizeof(__pyx_k_flags), 0, 0, 1, 1},
   {&__pyx_n_s_format, __pyx_k_format, sizeof(__pyx_k_format), 0, 0, 1, 1},
   {&__pyx_n_s_fortran, __pyx_k_fortran, sizeof(__pyx_k_fortran), 0, 0, 1, 1},
   {&__pyx_n_u_fortran, __pyx_k_fortran, sizeof(__pyx_k_fortran), 0, 1, 0, 1},
+  {&__pyx_n_s_getLogger, __pyx_k_getLogger, sizeof(__pyx_k_getLogger), 0, 0, 1, 1},
   {&__pyx_kp_s_got_differing_extents_in_dimensi, __pyx_k_got_differing_extents_in_dimensi, sizeof(__pyx_k_got_differing_extents_in_dimensi), 0, 0, 1, 0},
   {&__pyx_n_s_id, __pyx_k_id, sizeof(__pyx_k_id), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
+  {&__pyx_n_s_info, __pyx_k_info, sizeof(__pyx_k_info), 0, 0, 1, 1},
   {&__pyx_n_s_itemsize, __pyx_k_itemsize, sizeof(__pyx_k_itemsize), 0, 0, 1, 1},
   {&__pyx_kp_s_itemsize_0_for_cython_array, __pyx_k_itemsize_0_for_cython_array, sizeof(__pyx_k_itemsize_0_for_cython_array), 0, 0, 1, 0},
+  {&__pyx_n_s_log, __pyx_k_log, sizeof(__pyx_k_log), 0, 0, 1, 1},
+  {&__pyx_n_s_logging, __pyx_k_logging, sizeof(__pyx_k_logging), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_memview, __pyx_k_memview, sizeof(__pyx_k_memview), 0, 0, 1, 1},
   {&__pyx_n_s_mode, __pyx_k_mode, sizeof(__pyx_k_mode), 0, 0, 1, 1},
@@ -16628,6 +16755,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_struct, __pyx_k_struct, sizeof(__pyx_k_struct), 0, 0, 1, 1},
   {&__pyx_n_s_sys, __pyx_k_sys, sizeof(__pyx_k_sys), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
+  {&__pyx_kp_s_tigger_analyis, __pyx_k_tigger_analyis, sizeof(__pyx_k_tigger_analyis), 0, 0, 1, 0},
   {&__pyx_n_s_u1, __pyx_k_u1, sizeof(__pyx_k_u1), 0, 0, 1, 1},
   {&__pyx_kp_s_unable_to_allocate_array_data, __pyx_k_unable_to_allocate_array_data, sizeof(__pyx_k_unable_to_allocate_array_data), 0, 0, 1, 0},
   {&__pyx_kp_s_unable_to_allocate_shape_and_str, __pyx_k_unable_to_allocate_shape_and_str, sizeof(__pyx_k_unable_to_allocate_shape_and_str), 0, 0, 1, 0},
@@ -16638,7 +16766,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 215; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_RuntimeError = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeError); if (!__pyx_builtin_RuntimeError) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 799; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -16848,6 +16976,17 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__17);
   __Pyx_GIVEREF(__pyx_tuple__17);
 
+  /* "tigger/_bounce.pyx":16
+ * 
+ * import logging
+ * log = logging.getLogger("tigger.analyis")             # <<<<<<<<<<<<<<
+ * 
+ * cdef class TigerBase:
+ */
+  __pyx_tuple__18 = PyTuple_Pack(1, __pyx_kp_s_tigger_analyis); if (unlikely(!__pyx_tuple__18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__18);
+  __Pyx_GIVEREF(__pyx_tuple__18);
+
   /* "View.MemoryView":276
  *         return self.name
  * 
@@ -16855,9 +16994,9 @@ static int __Pyx_InitCachedConstants(void) {
  * cdef strided = Enum("<strided and direct>") # default
  * cdef indirect = Enum("<strided and indirect>")
  */
-  __pyx_tuple__18 = PyTuple_Pack(1, __pyx_kp_s_strided_and_direct_or_indirect); if (unlikely(!__pyx_tuple__18)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__18);
-  __Pyx_GIVEREF(__pyx_tuple__18);
+  __pyx_tuple__19 = PyTuple_Pack(1, __pyx_kp_s_strided_and_direct_or_indirect); if (unlikely(!__pyx_tuple__19)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__19);
+  __Pyx_GIVEREF(__pyx_tuple__19);
 
   /* "View.MemoryView":277
  * 
@@ -16866,9 +17005,9 @@ static int __Pyx_InitCachedConstants(void) {
  * cdef indirect = Enum("<strided and indirect>")
  * 
  */
-  __pyx_tuple__19 = PyTuple_Pack(1, __pyx_kp_s_strided_and_direct); if (unlikely(!__pyx_tuple__19)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 277; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__19);
-  __Pyx_GIVEREF(__pyx_tuple__19);
+  __pyx_tuple__20 = PyTuple_Pack(1, __pyx_kp_s_strided_and_direct); if (unlikely(!__pyx_tuple__20)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 277; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__20);
+  __Pyx_GIVEREF(__pyx_tuple__20);
 
   /* "View.MemoryView":278
  * cdef generic = Enum("<strided and direct or indirect>")
@@ -16877,9 +17016,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  * 
  */
-  __pyx_tuple__20 = PyTuple_Pack(1, __pyx_kp_s_strided_and_indirect); if (unlikely(!__pyx_tuple__20)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__20);
-  __Pyx_GIVEREF(__pyx_tuple__20);
+  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_kp_s_strided_and_indirect); if (unlikely(!__pyx_tuple__21)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__21);
+  __Pyx_GIVEREF(__pyx_tuple__21);
 
   /* "View.MemoryView":281
  * 
@@ -16888,9 +17027,9 @@ static int __Pyx_InitCachedConstants(void) {
  * cdef indirect_contiguous = Enum("<contiguous and indirect>")
  * 
  */
-  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_kp_s_contiguous_and_direct); if (unlikely(!__pyx_tuple__21)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 281; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__21);
-  __Pyx_GIVEREF(__pyx_tuple__21);
+  __pyx_tuple__22 = PyTuple_Pack(1, __pyx_kp_s_contiguous_and_direct); if (unlikely(!__pyx_tuple__22)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 281; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__22);
+  __Pyx_GIVEREF(__pyx_tuple__22);
 
   /* "View.MemoryView":282
  * 
@@ -16899,9 +17038,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  * 
  */
-  __pyx_tuple__22 = PyTuple_Pack(1, __pyx_kp_s_contiguous_and_indirect); if (unlikely(!__pyx_tuple__22)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__22);
-  __Pyx_GIVEREF(__pyx_tuple__22);
+  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_kp_s_contiguous_and_indirect); if (unlikely(!__pyx_tuple__23)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__23);
+  __Pyx_GIVEREF(__pyx_tuple__23);
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -16929,6 +17068,7 @@ PyMODINIT_FUNC PyInit__bounce(void)
 #endif
 {
   PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -17005,14 +17145,14 @@ PyMODINIT_FUNC PyInit__bounce(void)
   /*--- Variable export code ---*/
   /*--- Function export code ---*/
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_6tigger_7_bounce_TigerBase) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyType_Ready(&__pyx_type_6tigger_7_bounce_TigerBase) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_type_6tigger_7_bounce_TigerBase.tp_print = 0;
-  if (PyObject_SetAttrString(__pyx_m, "TigerBase", (PyObject *)&__pyx_type_6tigger_7_bounce_TigerBase) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyObject_SetAttrString(__pyx_m, "TigerBase", (PyObject *)&__pyx_type_6tigger_7_bounce_TigerBase) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_6tigger_7_bounce_TigerBase = &__pyx_type_6tigger_7_bounce_TigerBase;
   __pyx_type_6tigger_7_bounce_TigerDNA.tp_base = __pyx_ptype_6tigger_7_bounce_TigerBase;
-  if (PyType_Ready(&__pyx_type_6tigger_7_bounce_TigerDNA) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyType_Ready(&__pyx_type_6tigger_7_bounce_TigerDNA) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 83; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_type_6tigger_7_bounce_TigerDNA.tp_print = 0;
-  if (PyObject_SetAttrString(__pyx_m, "TigerDNA", (PyObject *)&__pyx_type_6tigger_7_bounce_TigerDNA) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyObject_SetAttrString(__pyx_m, "TigerDNA", (PyObject *)&__pyx_type_6tigger_7_bounce_TigerDNA) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 83; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_6tigger_7_bounce_TigerDNA = &__pyx_type_6tigger_7_bounce_TigerDNA;
   if (PyType_Ready(&__pyx_type___pyx_array) < 0) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 99; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_type___pyx_array.tp_print = 0;
@@ -17106,6 +17246,36 @@ PyMODINIT_FUNC PyInit__bounce(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_numpy, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
+  /* "tigger/_bounce.pyx":15
+ * from cython.operator import dereference as deref, preincrement as preinc
+ * 
+ * import logging             # <<<<<<<<<<<<<<
+ * log = logging.getLogger("tigger.analyis")
+ * 
+ */
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_logging, 0, -1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_logging, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "tigger/_bounce.pyx":16
+ * 
+ * import logging
+ * log = logging.getLogger("tigger.analyis")             # <<<<<<<<<<<<<<
+ * 
+ * cdef class TigerBase:
+ */
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_logging); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_getLogger); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__18, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_log, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
   /* "tigger/_bounce.pyx":1
  * # distutils: include_dirs = NUMPY_PATH             # <<<<<<<<<<<<<<
  * # cython: wraparound=False
@@ -17136,7 +17306,7 @@ PyMODINIT_FUNC PyInit__bounce(void)
  * cdef strided = Enum("<strided and direct>") # default
  * cdef indirect = Enum("<strided and indirect>")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)((PyObject *)__pyx_MemviewEnum_type)), __pyx_tuple__18, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)((PyObject *)__pyx_MemviewEnum_type)), __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_XGOTREF(generic);
   __Pyx_DECREF_SET(generic, __pyx_t_1);
@@ -17150,7 +17320,7 @@ PyMODINIT_FUNC PyInit__bounce(void)
  * cdef indirect = Enum("<strided and indirect>")
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)((PyObject *)__pyx_MemviewEnum_type)), __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 277; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)((PyObject *)__pyx_MemviewEnum_type)), __pyx_tuple__20, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 277; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_XGOTREF(strided);
   __Pyx_DECREF_SET(strided, __pyx_t_1);
@@ -17164,7 +17334,7 @@ PyMODINIT_FUNC PyInit__bounce(void)
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)((PyObject *)__pyx_MemviewEnum_type)), __pyx_tuple__20, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)((PyObject *)__pyx_MemviewEnum_type)), __pyx_tuple__21, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_XGOTREF(indirect);
   __Pyx_DECREF_SET(indirect, __pyx_t_1);
@@ -17178,7 +17348,7 @@ PyMODINIT_FUNC PyInit__bounce(void)
  * cdef indirect_contiguous = Enum("<contiguous and indirect>")
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)((PyObject *)__pyx_MemviewEnum_type)), __pyx_tuple__21, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 281; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)((PyObject *)__pyx_MemviewEnum_type)), __pyx_tuple__22, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 281; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_XGOTREF(contiguous);
   __Pyx_DECREF_SET(contiguous, __pyx_t_1);
@@ -17192,7 +17362,7 @@ PyMODINIT_FUNC PyInit__bounce(void)
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)((PyObject *)__pyx_MemviewEnum_type)), __pyx_tuple__22, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)((PyObject *)__pyx_MemviewEnum_type)), __pyx_tuple__23, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_XGOTREF(indirect_contiguous);
   __Pyx_DECREF_SET(indirect_contiguous, __pyx_t_1);
@@ -17238,6 +17408,7 @@ PyMODINIT_FUNC PyInit__bounce(void)
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
   if (__pyx_m) {
     if (__pyx_d) {
       __Pyx_AddTraceback("init tigger._bounce", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -17347,6 +17518,120 @@ invalid_keyword:
         function_name, key);
     #endif
     return 0;
+}
+
+static void __Pyx_RaiseDoubleKeywordsError(
+    const char* func_name,
+    PyObject* kw_name)
+{
+    PyErr_Format(PyExc_TypeError,
+        #if PY_MAJOR_VERSION >= 3
+        "%s() got multiple values for keyword argument '%U'", func_name, kw_name);
+        #else
+        "%s() got multiple values for keyword argument '%s'", func_name,
+        PyString_AsString(kw_name));
+        #endif
+}
+
+static int __Pyx_ParseOptionalKeywords(
+    PyObject *kwds,
+    PyObject **argnames[],
+    PyObject *kwds2,
+    PyObject *values[],
+    Py_ssize_t num_pos_args,
+    const char* function_name)
+{
+    PyObject *key = 0, *value = 0;
+    Py_ssize_t pos = 0;
+    PyObject*** name;
+    PyObject*** first_kw_arg = argnames + num_pos_args;
+    while (PyDict_Next(kwds, &pos, &key, &value)) {
+        name = first_kw_arg;
+        while (*name && (**name != key)) name++;
+        if (*name) {
+            values[name-argnames] = value;
+            continue;
+        }
+        name = first_kw_arg;
+        #if PY_MAJOR_VERSION < 3
+        if (likely(PyString_CheckExact(key)) || likely(PyString_Check(key))) {
+            while (*name) {
+                if ((CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**name) == PyString_GET_SIZE(key))
+                        && _PyString_Eq(**name, key)) {
+                    values[name-argnames] = value;
+                    break;
+                }
+                name++;
+            }
+            if (*name) continue;
+            else {
+                PyObject*** argname = argnames;
+                while (argname != first_kw_arg) {
+                    if ((**argname == key) || (
+                            (CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**argname) == PyString_GET_SIZE(key))
+                             && _PyString_Eq(**argname, key))) {
+                        goto arg_passed_twice;
+                    }
+                    argname++;
+                }
+            }
+        } else
+        #endif
+        if (likely(PyUnicode_Check(key))) {
+            while (*name) {
+                int cmp = (**name == key) ? 0 :
+                #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
+                    (PyUnicode_GET_SIZE(**name) != PyUnicode_GET_SIZE(key)) ? 1 :
+                #endif
+                    PyUnicode_Compare(**name, key);
+                if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
+                if (cmp == 0) {
+                    values[name-argnames] = value;
+                    break;
+                }
+                name++;
+            }
+            if (*name) continue;
+            else {
+                PyObject*** argname = argnames;
+                while (argname != first_kw_arg) {
+                    int cmp = (**argname == key) ? 0 :
+                    #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
+                        (PyUnicode_GET_SIZE(**argname) != PyUnicode_GET_SIZE(key)) ? 1 :
+                    #endif
+                        PyUnicode_Compare(**argname, key);
+                    if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
+                    if (cmp == 0) goto arg_passed_twice;
+                    argname++;
+                }
+            }
+        } else
+            goto invalid_keyword_type;
+        if (kwds2) {
+            if (unlikely(PyDict_SetItem(kwds2, key, value))) goto bad;
+        } else {
+            goto invalid_keyword;
+        }
+    }
+    return 0;
+arg_passed_twice:
+    __Pyx_RaiseDoubleKeywordsError(function_name, key);
+    goto bad;
+invalid_keyword_type:
+    PyErr_Format(PyExc_TypeError,
+        "%.200s() keywords must be strings", function_name);
+    goto bad;
+invalid_keyword:
+    PyErr_Format(PyExc_TypeError,
+    #if PY_MAJOR_VERSION < 3
+        "%.200s() got an unexpected keyword argument '%.200s'",
+        function_name, PyString_AsString(key));
+    #else
+        "%s() got an unexpected keyword argument '%U'",
+        function_name, key);
+    #endif
+bad:
+    return -1;
 }
 
 static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name) {
@@ -18327,120 +18612,6 @@ static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type) {
     PyErr_Format(PyExc_TypeError, "Cannot convert %.200s to %.200s",
                  Py_TYPE(obj)->tp_name, type->tp_name);
     return 0;
-}
-
-static void __Pyx_RaiseDoubleKeywordsError(
-    const char* func_name,
-    PyObject* kw_name)
-{
-    PyErr_Format(PyExc_TypeError,
-        #if PY_MAJOR_VERSION >= 3
-        "%s() got multiple values for keyword argument '%U'", func_name, kw_name);
-        #else
-        "%s() got multiple values for keyword argument '%s'", func_name,
-        PyString_AsString(kw_name));
-        #endif
-}
-
-static int __Pyx_ParseOptionalKeywords(
-    PyObject *kwds,
-    PyObject **argnames[],
-    PyObject *kwds2,
-    PyObject *values[],
-    Py_ssize_t num_pos_args,
-    const char* function_name)
-{
-    PyObject *key = 0, *value = 0;
-    Py_ssize_t pos = 0;
-    PyObject*** name;
-    PyObject*** first_kw_arg = argnames + num_pos_args;
-    while (PyDict_Next(kwds, &pos, &key, &value)) {
-        name = first_kw_arg;
-        while (*name && (**name != key)) name++;
-        if (*name) {
-            values[name-argnames] = value;
-            continue;
-        }
-        name = first_kw_arg;
-        #if PY_MAJOR_VERSION < 3
-        if (likely(PyString_CheckExact(key)) || likely(PyString_Check(key))) {
-            while (*name) {
-                if ((CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**name) == PyString_GET_SIZE(key))
-                        && _PyString_Eq(**name, key)) {
-                    values[name-argnames] = value;
-                    break;
-                }
-                name++;
-            }
-            if (*name) continue;
-            else {
-                PyObject*** argname = argnames;
-                while (argname != first_kw_arg) {
-                    if ((**argname == key) || (
-                            (CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**argname) == PyString_GET_SIZE(key))
-                             && _PyString_Eq(**argname, key))) {
-                        goto arg_passed_twice;
-                    }
-                    argname++;
-                }
-            }
-        } else
-        #endif
-        if (likely(PyUnicode_Check(key))) {
-            while (*name) {
-                int cmp = (**name == key) ? 0 :
-                #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
-                    (PyUnicode_GET_SIZE(**name) != PyUnicode_GET_SIZE(key)) ? 1 :
-                #endif
-                    PyUnicode_Compare(**name, key);
-                if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
-                if (cmp == 0) {
-                    values[name-argnames] = value;
-                    break;
-                }
-                name++;
-            }
-            if (*name) continue;
-            else {
-                PyObject*** argname = argnames;
-                while (argname != first_kw_arg) {
-                    int cmp = (**argname == key) ? 0 :
-                    #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
-                        (PyUnicode_GET_SIZE(**argname) != PyUnicode_GET_SIZE(key)) ? 1 :
-                    #endif
-                        PyUnicode_Compare(**argname, key);
-                    if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
-                    if (cmp == 0) goto arg_passed_twice;
-                    argname++;
-                }
-            }
-        } else
-            goto invalid_keyword_type;
-        if (kwds2) {
-            if (unlikely(PyDict_SetItem(kwds2, key, value))) goto bad;
-        } else {
-            goto invalid_keyword;
-        }
-    }
-    return 0;
-arg_passed_twice:
-    __Pyx_RaiseDoubleKeywordsError(function_name, key);
-    goto bad;
-invalid_keyword_type:
-    PyErr_Format(PyExc_TypeError,
-        "%.200s() keywords must be strings", function_name);
-    goto bad;
-invalid_keyword:
-    PyErr_Format(PyExc_TypeError,
-    #if PY_MAJOR_VERSION < 3
-        "%.200s() got an unexpected keyword argument '%.200s'",
-        function_name, PyString_AsString(key));
-    #else
-        "%s() got an unexpected keyword argument '%U'",
-        function_name, key);
-    #endif
-bad:
-    return -1;
 }
 
 static void __Pyx_RaiseArgumentTypeInvalid(const char* name, PyObject *obj, PyTypeObject *type) {
