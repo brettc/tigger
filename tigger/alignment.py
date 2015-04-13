@@ -158,10 +158,11 @@ class FastaParser(BaseParser):
 
 
 class Alignment(object):
-    def __init__(self):
+    def __init__(self, pth):
         self.species = []
         self.sequence_length = 0
         self.data = None
+        self.read(pth)
 
     @property
     def species_count(self):
@@ -186,18 +187,22 @@ class Alignment(object):
             d[i] = array.array("B", codons)
         self.data = d
 
-    def read(self, pth):
-        path = pathlib.Path(pth)
+    def read(self, path):
+        if not isinstance(path, pathlib.Path):
+            path = pathlib.Path(path)
+
         if not path.exists():
-            log.error("Cannot find sequence file '%s'", pth)
+            log.error("Cannot find sequence file '%s'", path)
             raise AlignmentError
 
-        log.debug("Reading alignment file '%s'", pth)
+        log.info("Reading alignment file '%s'", path)
         text = open(str(path), 'rU').read()
         suff = path.suffix.lower()
         if suff == '.phy':
+            log.debug("Using Phylip Parser")
             parser = PhylipParser()
         elif suff == '.fas':
+            log.debug("Using Fasta Parser")
             parser = FastaParser()
         else:
             log.error("Unknown file type: %s", str(path))
