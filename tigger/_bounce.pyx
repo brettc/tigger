@@ -23,13 +23,14 @@ cdef class TigerBase:
         if self.species_count == 0 or self.column_count == 0:
             return None
 
-        rates = numpy.zeros(self.column_count, dtype='f8')
+        rates = numpy.zeros((self.column_count, self.column_count),
+                            dtype='f8')
         cdef: 
             size_t i, j, i_b, j_b
             double rate, axpi, num, denom
             c_Bitset *i_bitset
             c_Bitset *j_bitset
-            np.npy_double[:] c_rates = rates
+            np.npy_double[:, :] c_rates = rates
 
         denom = <double>self.column_count - 1.0
         for i in range(self.column_count):
@@ -56,10 +57,7 @@ cdef class TigerBase:
                             axpi += 1.0
                             break
 
-                rate += axpi / num
-
-            rate /= denom
-            c_rates[i] = rate
+                c_rates[i, j] = axpi / num
 
         return rates
 
