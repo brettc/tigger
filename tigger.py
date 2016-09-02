@@ -26,7 +26,7 @@ from docopt import docopt
 import sys
 from tigger.alignment import Alignment, AlignmentError
 from tigger._bounce import TigerDNA
-from pathlib import Path
+from pathlib2 import Path
 import numpy
 
 def set_verbose():
