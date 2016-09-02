@@ -10,6 +10,15 @@ This implementation is a mix of python and [cython][cython] and C++ using a clas
 
 This isn't production code yet, as it is not portable, hasn't been properly tested, and is not feature complete...
 
+## Setting it up on a mac
+
+1. Install [boost][boost] using [homebrew][homebrew]: ```brew install boost```
+
+2. Cd to the base tigger folder and run ```python setup.py```
+
+That's it.
+
+
 [kmeans]:http://www.biomedcentral.com/1471-2148/15/13 
 
 [tiger]: http://bioinf.nuim.ie/tiger/
@@ -21,3 +30,5 @@ This isn't production code yet, as it is not portable, hasn't been properly test
 [cython]: http://cython.org/
 
 [boost]: http://www.boost.org/ 
+
+[homebrew]:http://brew.sh/
