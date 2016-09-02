@@ -5,23 +5,23 @@ import re
 # DEFINE FUNCTIONS
 
 def shared(x, y):
-	sh = 0
-	grX = x.split("|")
-	grY = y.split("|")
-	
-	for i in range(len(grX)):
-		grX[i] = set(grX[i].split(","))
-	for j in range(len(grY)):
-		grY[j] = set(grY[j].split(","))
-		
-		
-	for xXx in grX:
-		for yYy in grY:
-			if xXx.issubset(yYy):
-				sh += 1
-				break
-				
-	return sh
+    sh = 0
+    grX = x.split("|")
+    grY = y.split("|")
+
+    for i in range(len(grX)):
+        grX[i] = set(grX[i].split(","))
+    for j in range(len(grY)):
+        grY[j] = set(grY[j].split(","))
+
+
+    for xXx in grX:
+        for yYy in grY:
+            if xXx.issubset(yYy):
+                sh += 1
+                break
+
+    return sh
 
 def scoreConflict(indA, patA, patterns):
     vrai = True
@@ -53,9 +53,9 @@ def scoreConflict(indA, patA, patterns):
             score += (scB/len(compB))
 
     conflict_score = score/dividand
-	
+
     return conflict_score
-    
+
 def uniqify(seq):
     seen = {}
     result = []
@@ -73,9 +73,9 @@ def getPattern(site, unknown):
         if site[x] not in unknown:
             if site[x] in considered:
                 pattern[considered.index(site[x])].append(str(x))
-	    else:
+        else:
                 considered.append(site[x])
-		pattern.append([str(x)])
+        pattern.append([str(x)])
 
 
     patStr = "|".join([",".join(g) for g in pattern])
@@ -84,15 +84,15 @@ def getPattern(site, unknown):
 
 
 def jumblePattern(site, unknown):
-	import random
+    import random
 
-	siteJ = ""
-	while site:
-		pos = random.randrange(len(site))
-		siteJ += site[pos]
-		site = site[:pos] + site[(pos+1):]
+    siteJ = ""
+    while site:
+        pos = random.randrange(len(site))
+        siteJ += site[pos]
+        site = site[:pos] + site[(pos+1):]
 
-	return getPattern(siteJ, unknown)
+    return getPattern(siteJ, unknown)
 
 
 def DNAdetect(seq):
@@ -104,7 +104,7 @@ def DNAdetect(seq):
     seq_C = seq_C.replace("C", "")
     seq_C = seq_C.replace("G", "")
     seq_C = seq_C.replace("T", "")
-    
+
     nLen = float(len(seq_C))
     perc = (nLen/oLen)*100
 
@@ -117,7 +117,7 @@ def DNAdetect(seq):
             return "standard"
         else:
             return "protein"
-        
+
 
 def histogram(num_list, name_list):
     upper = float(max(num_list))
@@ -144,11 +144,11 @@ def FastaParse(file_name):
     names = []
     seqs = []
     for line in file:
-	    if ">" in line:
-		    names.append(line[1:].strip())
-		    seqs.append("")
-	    else:
-		    seqs[-1] += line.strip()
+        if ">" in line:
+            names.append(line[1:].strip())
+            seqs.append("")
+        else:
+            seqs[-1] += line.strip()
 
     ret = [names, seqs]
     return ret
@@ -175,7 +175,7 @@ TIGER: Tree-Independent Generation of Evolutionary Rates
            -f s: sorts sites depending on their agreement score
            -f r: displays rank values rather than bin numbers
            -f s,r: displays sorted ranks (*Be sure to put only a "," NO SPACE!)
-           
+
            Default prints bin numbers unsorted.
 
 -b         Set the number of bins to be used.
@@ -184,16 +184,16 @@ TIGER: Tree-Independent Generation of Evolutionary Rates
            Default is 10
 
 -rl       A list of the rate at each site may be optionally written to a specified
-          file. 
+          file.
           -rl <file.txt> : writes list of the rates at each site to file.txt.
 
--ptp      Specifies that a PTP test should be run. *Note: this option has a huge 
+-ptp      Specifies that a PTP test should be run. *Note: this option has a huge
           effect on running time!
 
--z        Number of randomisations to be used for the PTP test. 
+-z        Number of randomisations to be used for the PTP test.
           -z <int>: each site will be randomised <int> times. <int> is a whole number.
 
-	 Default is 100
+     Default is 100
 
 -p       Specify p-value which denotes significance in PTP test.
          -p <float>: site will be denoted as significant if p-value is better than <float>.
@@ -204,26 +204,26 @@ TIGER: Tree-Independent Generation of Evolutionary Rates
 -pl      Write a list of p-values to a specified file.
          -pl <file.txt>: writes list of p-values for each site to file.txt.
 
--u       Specify unknown characters in the alignment. Unknown characters are omitted from 
+-u       Specify unknown characters in the alignment. Unknown characters are omitted from
          site patterns and so are not considered in the analysis.
          -u ?,-,*: defines ?, - and * as unknown characters. (*Be sure to put only a comma
                    between characters, NO SPACE!!)
-         
+
          Default is ? only
 
 
 -Examples:
-     
+
 1.   ./TIGER -in ExampleFile.aln -f s,r -v -rl rate_list.txt
 
      This will run the software on "ExampleFile.aln", with sorted ranks included in the output.
      The variability measure for each site will be displayed and a list of the rates at (unsorted)
      sites will be written to the file "rate_list.txt".
-  
+
 2.   ./TIGER -in ExampleFile.aln -ptp -r 1000 -p 0.01 -u ?,*
 
      This will run the software on the file "ExampleFile.aln" with a PTP test. Sites will be
      randomised 1,000 times and pass the test if their p-value is <0.01. All ? and * characters
      encountered in the alignment will be ommitted from the analysis.
-   
+
      """

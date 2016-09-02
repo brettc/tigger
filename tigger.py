@@ -18,7 +18,8 @@ import logging
 log = logging.getLogger("tigger.main")
 logging.basicConfig(
     format="%(levelname)-8s | %(asctime)s | %(message)s",
-    level=logging.INFO
+    level=logging.INFO,
+    datefmt="%H:%M:%S"
 )
 
 from docopt import docopt
@@ -44,7 +45,7 @@ def main(arguments):
     try:
         a = Alignment(filepath)
     except AlignmentError:
-        return 0
+        return 1
 
     log.info("Species count %s", a.species_count)
     log.info("Alignment size %s", a.sequence_length)
@@ -53,14 +54,14 @@ def main(arguments):
     t = TigerDNA()
     t.build_bitsets(a)
     rates = t.calc_rates()
-    output_path = str(filepath.with_suffix('.tigger'))
-
     log.info("Finished analysis --- ")
 
+    output_path = str(filepath.with_suffix('.tigger'))
     log.info("Saving file %s", output_path)
     numpy.savetxt(output_path, rates, fmt="%5f", delimiter='\n')
 
-    return 1
+    # Everything ran okay
+    return 0
 
 if __name__ == "__main__":
     arguments = docopt(__doc__, version=__version__)
