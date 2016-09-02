@@ -34,6 +34,11 @@ E	AAGT
 What we are looking for is a matrix of TIGER compatibilities (pa(i,j)) for each possible pair of sites. The alignment above is saved as 'test.phy', so we can do this (assuming we're workign in the base tigger directory):
 
 ```python
+from tigger.alignment import Alignment, AlignmentError
+from tigger._bounce import TigerDNA
+from pathlib2 import Path
+import numpy
+
 t = "./data/test.phy"
 aln = Alignment(t)
 t.build_bitsets(aln)
