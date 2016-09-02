@@ -8,10 +8,10 @@ log = logging.getLogger("tigger.alignment")
 
 import os
 from pyparsing import (Word, OneOrMore, alphas, nums, Suppress, stringEnd,
-                       ParseException, restOfLine, LineEnd, ZeroOrMore, Upcase)
+                       ParseException, restOfLine, LineEnd, ZeroOrMore)
 import numpy
 import array
-import pathlib
+import pathlib2
 
 class AlignmentError(RuntimeError):
     pass
@@ -20,7 +20,7 @@ class BaseParser(object):
     """Parses an alignment and returns species sequence tuples"""
 
     # I think this covers it...
-    BASES = Upcase(Word(alphas + "?.-"))
+    BASES = Word(alphas + "?.-")
 
     def __init__(self):
         self.sequence_length = None
@@ -188,8 +188,8 @@ class Alignment(object):
         self.data = d
 
     def read(self, path):
-        if not isinstance(path, pathlib.Path):
-            path = pathlib.Path(path)
+        if not isinstance(path, pathlib2.Path):
+            path = pathlib2.Path(path)
 
         if not path.exists():
             log.error("Cannot find sequence file '%s'", path)
