@@ -37,10 +37,12 @@ What we are looking for is a matrix of TIGER compatibilities (pa(i,j)) for each 
 from tigger.alignment import Alignment, AlignmentError
 from tigger._bounce import TigerDNA
 from pathlib2 import Path
-import numpy
+import numpy as np
 
-t = "./data/test.phy"
-aln = Alignment(t)
+
+t = TigerDNA()
+aln_name = "./data/test.phy"
+aln = Alignment(aln_name)
 t.build_bitsets(aln)
 rates = t.calc_rates()
 rates
@@ -55,15 +57,27 @@ array([[ 0.        ,  0.5       ,  0.5       ,  1.        ],
        [ 0.66666667,  0.5       ,  0.5       ,  0.        ]])
 ```
 
-Those diagonals shouldn't be zeros, so we'll fix that, then get the row means, which are the TIGER rates according to the original paper (eqn 2):
+Those diagonals shouldn't be 0's, that's just a placeholder we use in the C++ code. We'll fix that, then get the row means, which are the TIGER rates according to the original paper (eqn 2):
 
 ```python
 np.fill_diagonal(rates, np.NaN)
-TIGER = np.nanmean(rates, axis = 1)
+tiger_rates = np.nanmean(rates, axis = 1)
+tiger_rates
 ```
 
+Those are the tiger rates for our data: 
 
-From that, we can calculate the mean TIGER rate of each site
+```
+array([ 0.66666667,  1.        ,  1.        ,  0.55555556])
+```
+
+If you like heatmaps (careful if you have a big rate matrix!!!):
+
+```
+import seaborn as sns
+%matplotlib osx
+ax = sns.heatmap(rates)
+```
 
 [kmeans]:http://www.biomedcentral.com/1471-2148/15/13 
 
